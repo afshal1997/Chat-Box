@@ -1,5 +1,23 @@
+function createHiddenInputForFile(parent) {
+    const input_type_file = document.createElement('input')
+    input_type_file.setAttribute('type', 'file')
+    input_type_file.setAttribute('hidden', true)
+    input_type_file.setAttribute('id', "select-file")
+    input_type_file.setAttribute('multiple', true)
+    input_type_file.setAttribute('onchange', 'selectFiles(event)')
+    parent.appendChild(input_type_file)
+}
+function openFileBox() {
+    document.querySelector("#select-file").click()
+}
+function selectFiles(event) {
+    console.log(event.target.files)
+}
 function chatInit(selector) {
     document.addEventListener('DOMContentLoaded', () => {
+
+        const chat_app = document.createElement('div')
+        chat_app.setAttribute('class', 'chat-app')
         const chat_app_box = document.createElement('div')
         chat_app_box.setAttribute('class', 'chat-app_box')
         const notificationBox = document.createElement("div");
@@ -22,12 +40,22 @@ function chatInit(selector) {
         const file_select_button = document.createElement('div')
         file_select_button.setAttribute('class', 'file-select-button')
         const fa_fa_paperclip_attachment = document.createElement('i')
+        createHiddenInputForFile(chat_app_footer)
         fa_fa_paperclip_attachment.setAttribute('class', 'fa fa-paperclip attachment')
         fa_fa_paperclip_attachment.setAttribute('aria-hidden', 'true')
+        fa_fa_paperclip_attachment.setAttribute('onclick', 'openFileBox()')
         file_select_button.appendChild(fa_fa_paperclip_attachment)
+        const sendMessageInput = document.createElement('input')
+        sendMessageInput.setAttribute('class', 'chat-input')
+        sendMessageInput.setAttribute('value', '')
+        sendMessageInput.setAttribute('id', 'chat-input')
+        sendMessageInput.setAttribute('type', 'text')
+
+        sendMessageInput.setAttribute('placeholder', 'type a message')
         file_upload_select.appendChild(file_select_button)
         file_upload.appendChild(file_upload_select)
         chat_app_footer.appendChild(file_upload)
+        chat_app_footer.appendChild(sendMessageInput)
         notificationBoxNumberBold.innerHTML = "1"
         notificationBoxNumberH6.appendChild(notificationBoxNumberBold)
         notificationBoxNumber.appendChild(notificationBoxNumberH6)
@@ -43,7 +71,7 @@ function chatInit(selector) {
         sendIcon.setAttribute('class', "fas fa-paper-plane")
 
         icon_send.setAttribute("class", "icon send")
-        icon_send.setAttribute('onclick', 'sendMesaage()')
+        icon_send.setAttribute('onclick', 'sendMessage()')
         icon_send.appendChild(sendIcon)
 
         chat_app_toggle.setAttribute("class", "chat-app_toggle toggle")
@@ -53,8 +81,7 @@ function chatInit(selector) {
         chat_app_box.appendChild(chat_app_toggle);
         chat_app_box.appendChild(chat_app_footer);
         console.log(chat_app_box)
-        // document.getElementById("chat-app").appendChild(chat_app_box)
-        document.body.appendChild(chat_app_box)
+        document.body.appendChild(chat_app.appendChild(chat_app_box))
         setTimeout(function () {
             $(".notificationBoxH6").addClass("disableactiveMessageBox");
             $(".notificationBoxNumber").addClass("able");
@@ -97,21 +124,21 @@ function chatInit(selector) {
 chatInit('#chat-app')
 let sendButton = document.querySelector('#submit-form')
 
-function sendMesaage(e) {
+function sendMessage(e) {
     console.log(e)
     let formValue = document.getElementById("chat-input").value
     if (!formValue) {
         return;
     }
-    let parentchatContainer = document.getElementById('message')
-    let newMessge = document.createElement("p")
-    newMessge.setAttribute('class', 'message')
-    newMessge.innerHTML = formValue
-    parentchatContainer.appendChild(newMessge)
+    let parentChatContainer = document.getElementById('message')
+    let newMessage = document.createElement("p")
+    newMessage.setAttribute('class', 'message')
+    newMessage.innerHTML = formValue
+    parentChatContainer.appendChild(newMessage)
     document.getElementById("chat-input").value = ""
 }
 sendButton.onclick = function (event) {
-    sendMesaage(event)
+    sendMessage(event)
 }
 
 $(function () {
