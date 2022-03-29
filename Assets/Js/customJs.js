@@ -62,7 +62,7 @@ function enableChatAppIcon() {
     notificationBoxNumber.appendChild(notificationBoxNumberH6)
     notificationBox.setAttribute("class", "notificationBox")
     notificationBoxH6.setAttribute("class", "notificationBoxH6")
-    initNotification.innerHTML = "This is a paragraph.";
+    initNotification.innerHTML = "All Desk Chat App";
     h6.append(initNotification)
     notificationBoxH6.appendChild(h6)
     notificationBoxNumber.appendChild(notificationBoxNumberH6)
@@ -79,8 +79,14 @@ function enableChatAppIcon() {
 function toggleChatMode(){
     document.querySelector('#chat-app_box').classList.toggle('d-none')
 }
+function toggleToaster(){
+    setTimeout(() => {
+        document.querySelectorAll('.notificationBoxH6')[0].classList.toggle('d-none')
+    }, 2000);
+}
 function chatInit() {
     enableChatAppIcon()
+    toggleToaster()
     const chat_app = document.createElement('div')
     chat_app.setAttribute('class', 'chat-app position-relative')
     const chat_app_box = document.createElement('div')
@@ -104,9 +110,6 @@ function chatInit() {
     fa_fa_paperclip_attachment.setAttribute('onclick', 'openFileBox()')
     file_select_button.appendChild(fa_fa_paperclip_attachment)
     sendMessageAndAction(chat_app_footer)
-
-
-
     chat_app_box.appendChild(chat_app_footer);
     document.body.insertAdjacentElement('beforeend', chat_app_box)
 
