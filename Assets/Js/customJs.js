@@ -46,7 +46,20 @@ function chatAppHeader(parent) {
 function selectFiles(event) {
     console.log(event.target.file)
 }
+function messagesUI(parent) {
+    const dummyMessageContainer = document.createElement('div')
+    dummyMessageContainer.setAttribute('class', 'chat-app_content')
+    const dummyMessage = document.createElement('div')
+    dummyMessage.setAttribute('class', 'messages')
+    dummyMessage.setAttribute('id', 'message')
+    const dummyMessageReply = document.createElement('div')
+    dummyMessageReply.setAttribute('class', 'message reply')
+    dummyMessageReply.innerHTML = "reply"
+    dummyMessage.appendChild(dummyMessageReply)
 
+    dummyMessageContainer.appendChild(dummyMessage)
+    parent.append(dummyMessageContainer)
+}
 function enableChatAppIcon() {
     const chat_app_toggle = document.createElement("div")
     const open_chat_app = document.createElement("div")
@@ -76,10 +89,10 @@ function enableChatAppIcon() {
     document.body.insertAdjacentElement('beforeend', notificationBox)
 
 }
-function toggleChatMode(){
+function toggleChatMode() {
     document.querySelector('#chat-app_box').classList.toggle('d-none')
 }
-function toggleToaster(){
+function toggleToaster() {
     setTimeout(() => {
         document.querySelectorAll('.notificationBoxH6')[0].classList.toggle('d-none')
     }, 2000);
@@ -93,6 +106,7 @@ function chatInit() {
     chat_app_box.setAttribute('class', 'chat-app_box d-none')
     chat_app_box.setAttribute('id', 'chat-app_box')
     chatAppHeader(chat_app_box)
+    messagesUI(chat_app_box)
     // footer
     const chat_app_footer = document.createElement('div')
     chat_app_footer.style.bottom = "0px";
