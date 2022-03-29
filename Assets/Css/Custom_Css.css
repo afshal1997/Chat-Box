@@ -185,8 +185,12 @@ body {
     border-radius: 16px 16px 40px 16px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    position: relative;
-    height: 600px;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    height: 500px;
+    width: 100%;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     background: white;
@@ -266,6 +270,7 @@ body {
     z-index: 2;
     border-radius: 100%;
     box-shadow: 0 0 0 2px white;
+    background-color: #00cdac;
 }
 
 .chat-app_header .content {
@@ -562,4 +567,9 @@ body {
         opacity: 1;
         transform: none;
     }
+}
+.send-message-addon-button{
+    right: 0;
+    padding: 10px !important;
+    z-index: 9999 !important;
 }
